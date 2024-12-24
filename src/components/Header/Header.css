@@ -24,6 +24,11 @@
     align-items: center;
 }
 
+.nav-links a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .header-left .nav-links li {
     color: #283C4D;
 }

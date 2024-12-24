@@ -1,4 +1,4 @@
-import './Launch.css';
+import './LaunchPage.css';
 import LaunchButton from '../../components/Button/LaunchButton';
 import QuizIcon from "../../assets/quiz-icon.png";
 import SpaceshipIcon from "../../assets/spaceship-icon.png";

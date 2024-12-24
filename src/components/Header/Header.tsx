@@ -1,4 +1,5 @@
 import './Header.css';
+import { Link } from 'react-router-dom';
 import logo from "../../assets/socrative-logo.png";
 
 function Header() {
@@ -8,9 +9,9 @@ function Header() {
                 <img src={logo} alt="Socrative Logo" className="logo" />
                 <nav>
                     <ul className="nav-links">
-                        <li>Launch</li>
-                        <li>Library</li>
-                        <li>Live Results</li>
+                        <li><Link to="/launch">Launch</Link></li>
+                        <li><Link to="/library">Library</Link></li>
+                        <li><Link to="/live-results">Live Results</Link></li>
                     </ul>
                 </nav>
             </div>
