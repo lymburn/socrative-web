@@ -1,9 +1,9 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Header from './components/Header/Header';
+import Header from './components/Header';
 import LaunchPage from './features/launch/LaunchPage';
-import LibraryPage from './features/Library/LibraryPage';
-import LiveResultsPage from './features/Results/LiveResultsPage';
+import LibraryPage from './features/library/LibraryPage';
+import LiveResultsPage from './features/results/LiveResultsPage';
 
 function App() {
   return (

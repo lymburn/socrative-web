@@ -1,6 +1,6 @@
 import './Header.css';
 import { Link } from 'react-router-dom';
-import logo from "../../assets/socrative-logo.png";
+import logo from "../assets/socrative-logo.png";
 
 function Header() {
     return (

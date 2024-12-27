@@ -1,4 +1,3 @@
-import Launch from "./LaunchPage";
 import "./LaunchButton.css";
 
 interface LaunchButtonProps {

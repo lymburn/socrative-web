@@ -1,10 +1,12 @@
+import './LibraryPage.css';
+import QuizList from './QuizList';
 
 function LibraryPage() {
     return (
       <div className="library-page">
-          <div>
-              Hi
-          </div>
+        <div className="library-container">
+          <QuizList/>
+        </div>
       </div>
     );
   };

@@ -1,0 +1,81 @@
+.quiz-list {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+}
+
+.quiz-list button {
+    all: unset;
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.quiz-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quiz-list-tabs {
+    display: flex;
+    gap: 2rem;
+}
+
+.quiz-list .tab {
+    color: #283C4D;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.tab:hover {
+    text-decoration: underline;
+    text-decoration-color: #5C6975;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 8px;
+}
+
+.quiz-list-buttons {
+    display: flex;
+    gap: 2rem;
+}
+
+.quiz-list .add-quiz-btn {
+    color: #fff;
+    background-color: #00B5E2;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.add-quiz-btn:hover {
+    opacity: 80%;
+}
+
+.quiz-list-columns {
+    display: grid;
+    grid-template-columns: 6fr 1fr 0.5fr; /* Name, Modified, and Delete button columns */
+    gap: 1rem;
+    color: #3290B5;
+}
+
+.quiz-item {
+    display: grid;
+    grid-template-columns: 6fr 1fr 0.5fr;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #E7EDF0;
+}
+
+.quiz-item .delete-btn {
+    color: #fff;
+    background-color: #FF4D4D;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    text-align: center;
+}
+
+.delete-btn:hover {
+    opacity: 80%;
+}
+
+
