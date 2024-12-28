@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './QuizList.css';
 import Divider from '../../components/Divider';
+import { useNavigate } from "react-router-dom";
 
 interface Tab {
     id: string;
@@ -25,13 +26,16 @@ function QuizList() {
         { id: 'deleted', label: 'Deleted' },
     ];
 
+    const navigate = useNavigate();
+
     const addQuiz = () => {
-        const newQuiz: Quiz = {
-          id: Date.now(),
-          name: `New Quiz ${quizzes.length + 1}`,
-          modified: new Date().toLocaleDateString(),
-        };
-        setQuizzes([...quizzes, newQuiz]);
+        // const newQuiz: Quiz = {
+        //   id: Date.now(),
+        //   name: `New Quiz ${quizzes.length + 1}`,
+        //   modified: new Date().toLocaleDateString(),
+        // };
+        // setQuizzes([...quizzes, newQuiz]);
+        navigate("/edit-quiz"); // Navigate to QuizEditorPage
       };
     
       const deleteQuiz = (id: number) => {

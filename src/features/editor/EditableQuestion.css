@@ -1,0 +1,82 @@
+.editable-question-container {
+    border-radius: 0.5rem;
+    padding: 1rem 2rem; 
+    background-color: #F5F7F8;
+    width: 100%;
+    display: flex;
+    gap: 10%;
+    color: #283C4D;
+}
+
+.editable-question-details {
+    flex: 2;
+}
+
+.editable-question-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+.question-input {
+    flex: 1;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+}
+
+.points-input {
+    width: 4rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.choice-input {
+    flex: 1;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+}
+
+.editable-question-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.save-question,
+.delete-question {
+    color: #0075A3;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.save-question {
+    background-color: #E4FBFF;
+}
+
+.delete-question {
+    background-color: transparent;
+}
+
+.delete-question:hover {
+    color: #FF4D4D;
+}
+
+.save-question:hover {
+    opacity: 80%;
+}
+
+.question-input::placeholder,
+.points-input::placeholder,
+.choice-input::placeholder {
+    color: #A9A9A9;
+}

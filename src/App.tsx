@@ -4,6 +4,7 @@ import Header from './components/Header';
 import LaunchPage from './features/launch/LaunchPage';
 import LibraryPage from './features/library/LibraryPage';
 import LiveResultsPage from './features/results/LiveResultsPage';
+import QuizEditorPage from "./features/editor/QuizEditorPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/launch" element={<LaunchPage />} />
         <Route path="/library" element={<LibraryPage />} />
         <Route path="/live-results" element={<LiveResultsPage />} />
+        <Route path="/edit-quiz" element={<QuizEditorPage />} />
       </Routes>
     </Router>
   )
