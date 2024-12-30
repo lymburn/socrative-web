@@ -1,0 +1,36 @@
+.quiz-table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+}
+
+.quiz-table-columns {
+    display: grid;
+    grid-template-columns: 6fr 1fr 0.5fr;
+    gap: 1rem;
+    font-weight: bold;
+    color: #3290b5;
+}
+
+.quiz-table-row {
+    display: grid;
+    grid-template-columns: 6fr 1fr 0.5fr;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e7edf0;
+}
+
+.quiz-table .quiz-delete-btn {
+    color: #fff;
+    background-color: #ff4d4d;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+.quiz-delete-btn:hover {
+    opacity: 80%;
+}
