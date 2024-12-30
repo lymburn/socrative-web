@@ -3,8 +3,14 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    cursor: pointer;
     margin: 0 4rem;
     gap: 1.25rem;
+}
+
+.launch-button:hover {
+    transform: scale(1.05); /* Slight scaling effect for hover */
+    cursor: pointer; /* Ensures the pointer appears */
 }
 
 .launch-button-circle {

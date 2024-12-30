@@ -5,10 +5,11 @@ import Divider from "./Divider";
 interface QuizTableProps {
     quizzes: Quiz[];
     showDelete?: boolean; // Whether to show the delete button
-    onDelete?: (id: number) => void; // Callback for delete action
+    onDelete?: (id: number) => void;
+    onRowClick?: (quiz: Quiz) => void;
 }
 
-function QuizTable({ quizzes, showDelete = false, onDelete }: QuizTableProps) {
+function QuizTable({ quizzes, showDelete = false, onDelete, onRowClick }: QuizTableProps) {
     return (
         <div className="quiz-table">
             <div className="quiz-table-columns">
@@ -17,7 +18,12 @@ function QuizTable({ quizzes, showDelete = false, onDelete }: QuizTableProps) {
             </div>
             <Divider color="#E7EDF0"></Divider>
             {quizzes.map((quiz) => (
-                <div className="quiz-table-row" key={quiz.id}>
+                <div
+                    key={quiz.id}
+                    className="quiz-table-row"
+                    data-clickable={Boolean(onRowClick)}
+                    onClick={() => onRowClick && onRowClick(quiz)}
+                >
                     <div className="quiz-name-column">{quiz.name}</div>
                     <div className="quiz-modified-column">{quiz.modified}</div>
                     {showDelete && (

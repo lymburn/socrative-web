@@ -14,7 +14,7 @@ function App() {
         <Route path="/" element={<Navigate to="/launch" />} />
         <Route path="/launch" element={<LaunchPage />} />
         <Route path="/library" element={<LibraryPage />} />
-        <Route path="/live-results" element={<LiveResultsPage />} />
+        <Route path="/results" element={<LiveResultsPage />} />
         <Route path="/edit-quiz" element={<QuizEditorPage />} />
       </Routes>
     </Router>

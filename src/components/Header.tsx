@@ -11,7 +11,7 @@ function Header() {
                     <ul className="nav-links">
                         <li><Link to="/launch">Launch</Link></li>
                         <li><Link to="/library">Library</Link></li>
-                        <li><Link to="/live-results">Live Results</Link></li>
+                        <li><Link to="/results">Live Results</Link></li>
                     </ul>
                 </nav>
             </div>
