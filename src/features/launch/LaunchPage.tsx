@@ -1,5 +1,6 @@
 import {useState} from "react";
 import './LaunchPage.css';
+import Header from "../../components/Header";
 import LaunchButton from './LaunchButton';
 import QuizIcon from "../../assets/quiz-icon.png";
 import SpaceshipIcon from "../../assets/spaceship-icon.png";
@@ -15,6 +16,7 @@ function Launch() {
 
   return (
     <div className="launch-page">
+      <Header />
       <div className="launch-button-container">
         <LaunchButton
                       icon={QuizIcon}

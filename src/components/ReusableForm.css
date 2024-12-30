@@ -1,0 +1,70 @@
+/* Full-page layout for the form */
+.reusable-form-page {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: lightgray;
+}
+
+/* Centered container for the form */
+.reusable-form-container {
+    background: #DFEAF3;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    width: 30%;
+}
+
+/* Title styling */
+.reusable-form-title {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: #555;
+}
+
+/* Input group styling for each label and input */
+.reusable-input-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.reusable-input-group label {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #555;
+    display: block;
+}
+
+.reusable-input-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    border-radius: 4px;
+    transition: border-color 0.2s ease;
+}
+
+.reusable-input-group input:hover {
+    border-color: #888;
+}
+
+/* Primary button styling */
+.reusable-primary-btn {
+    background-color: #ff9900;
+    color: white;
+    border: none;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.2s ease;
+    border-radius: 4px;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+.reusable-primary-btn:hover {
+    background-color: #cc7a00;
+}

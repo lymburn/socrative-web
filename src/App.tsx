@@ -1,21 +1,26 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Header from './components/Header';
+import LandingPage from './features/auth/LandingPage';
 import LaunchPage from './features/launch/LaunchPage';
 import LibraryPage from './features/library/LibraryPage';
 import LiveResultsPage from './features/results/LiveResultsPage';
 import QuizEditorPage from "./features/editor/QuizEditorPage";
+import TeacherLogin from './features/auth/TeacherLogin';
+import StudentLogin from './features/auth/StudentLogin';
+import Register from './features/auth/Register';
 
 function App() {
   return (
     <Router>
-      <Header />
       <Routes>
-        <Route path="/" element={<Navigate to="/launch" />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/launch" element={<LaunchPage />} />
         <Route path="/library" element={<LibraryPage />} />
         <Route path="/results" element={<LiveResultsPage />} />
         <Route path="/edit-quiz" element={<QuizEditorPage />} />
+        <Route path="/teacher-login" element={<TeacherLogin />} />
+        <Route path="/student-login" element={<StudentLogin />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </Router>
   )
