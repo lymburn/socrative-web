@@ -1,19 +1,25 @@
 import { useNavigate } from "react-router-dom";
+import { authRepository } from "../../data/repositories/authRepository";
 import ReusableForm from "../../components/ReusableForm";
 
 function Register() {
     const navigate = useNavigate();
 
-    const handleRegister = (formData: Record<string, string>) => {
+    const handleRegister = async (formData: Record<string, string>) => {
         const { email, password } = formData;
 
         // Basic validation
-        if (!email.includes("@") || password.length < 6) {
-            alert("Please enter a valid email and a password with at least 6 characters.");
+        if (!email || !password) {
+            alert("Please enter a valid email and password.");
             return;
         }
 
-        navigate("/launch");
+        try {
+            await authRepository.register(email, password);
+            navigate("/teacher-login");
+        } catch (error: any) {
+            alert(error.message);
+        }
     };
 
     return (

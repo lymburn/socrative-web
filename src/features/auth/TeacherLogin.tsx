@@ -1,19 +1,12 @@
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/AuthProvider";
 import ReusableForm from "../../components/ReusableForm";
 
 function TeacherLogin() {
-    const navigate = useNavigate();
+    const auth = useAuth();
 
-    const handleLogin = (formData: Record<string, string>) => {
+    const handleLogin = async (formData: Record<string, string>) => {
         const { email, password } = formData;
-
-        // Basic empty validation
-        if (!email || !password) {
-            alert("Please fill in both email and password.");
-            return;
-        }
-
-        navigate("/launch");
+        await auth.login(email, password);
     };
 
     return (
@@ -27,6 +20,6 @@ function TeacherLogin() {
             onSubmit={handleLogin}
         />
     );
-};
+}
 
 export default TeacherLogin;
