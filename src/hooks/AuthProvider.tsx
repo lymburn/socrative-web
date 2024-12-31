@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { authRepository } from "../data/repositories/authRepository";
 import { User } from "../models/User";
@@ -25,6 +25,7 @@ type ContextProviderProps = {
 const AuthProvider = ({ children }: ContextProviderProps) => {
     const [user, setUser] = useState<User | null>(null);
     const [token, setToken] = useState<string | null>(null);
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     // Login function
@@ -47,12 +48,23 @@ const AuthProvider = ({ children }: ContextProviderProps) => {
         setToken(null);
         localStorage.removeItem("jwt");
         localStorage.removeItem("user");
-        navigate("/teacher-login"); // Navigate to login page
+        navigate("/");
     };
+
+    // Rehydrate user state on app load
+    useEffect(() => {
+        const storedToken = localStorage.getItem("jwt");
+        const storedUser = localStorage.getItem("user");
+        if (storedToken && storedUser) {
+            setToken(storedToken);
+            setUser(JSON.parse(storedUser));
+        }
+        setLoading(false); // Set loading to false after rehydration
+    }, []);
 
     return (
         <AuthContext.Provider value={{ user, token, login, logout }}>
-            {children}
+            {!loading && children}
         </AuthContext.Provider>
     );
 };

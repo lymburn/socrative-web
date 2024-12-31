@@ -44,6 +44,18 @@
     color: gray;
 }
 
+.sign-out-btn {
+    color: #ff4d4d;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.sign-out-btn:hover {
+    opacity: 80%;
+}
+
 .room-id {
     background-color: #F6F8F9;
     padding: 0.5rem;

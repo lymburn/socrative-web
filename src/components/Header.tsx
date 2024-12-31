@@ -1,8 +1,11 @@
 import './Header.css';
 import { Link } from 'react-router-dom';
 import logo from "../assets/socrative-logo.png";
+import { useAuth } from "../hooks/AuthProvider";
 
 function Header() {
+    const auth = useAuth();
+
     return (
         <header className="header">
             <div className="header-left">
@@ -18,7 +21,9 @@ function Header() {
             <div className="header-right">
                 <ul className="nav-links">
                     <li className="room-id">LU489</li>
-                    <li>Account</li>
+                    <li>
+                        <button className="sign-out-btn" onClick={auth.logout}>Sign Out</button>
+                    </li>
                 </ul>
             </div>
         </header>
