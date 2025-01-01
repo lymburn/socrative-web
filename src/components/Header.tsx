@@ -6,6 +6,9 @@ import { useAuth } from "../hooks/AuthProvider";
 function Header() {
     const auth = useAuth();
 
+    // Use the first room id as the default room as there's currently only support for one room.
+    const defaultRoomId = auth.user?.rooms?.[0]?.room_id || "No Room";
+
     return (
         <header className="header">
             <div className="header-left">
@@ -20,7 +23,8 @@ function Header() {
             </div>
             <div className="header-right">
                 <ul className="nav-links">
-                    <li className="room-id">LU489</li>
+                    <li className="room-id">{defaultRoomId}</li>
+                    <li className="user-email">{auth.user?.email}</li>
                     <li>
                         <button className="sign-out-btn" onClick={auth.logout}>Sign Out</button>
                     </li>

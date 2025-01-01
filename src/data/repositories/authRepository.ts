@@ -1,13 +1,13 @@
 import { authApi } from "../../api/authApi";
-import { User } from "../../models/User";
+import { AuthResponse } from "../../models/AuthResponse";
 
 export const authRepository = {
-    register: async (email: string, password: string): Promise<User> => {
+    register: async (email: string, password: string): Promise<AuthResponse> => {
         const response = await authApi.register(email, password);
-        return response.user; // Return user object
+        return response; // Return user object
     },
 
-    login: async (email: string, password: string): Promise<{ token: string; user: User }> => {
+    login: async (email: string, password: string): Promise<AuthResponse> => {
         const response = await authApi.login(email, password);
         localStorage.setItem("jwt", response.token); // Store JWT token
         return response;
