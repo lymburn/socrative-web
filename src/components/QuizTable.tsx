@@ -1,6 +1,7 @@
 import "./QuizTable.css";
 import { Quiz } from "../models/Quiz";
 import Divider from "./Divider";
+import { formatDateString } from "../utils/dateUtils";
 
 interface QuizTableProps {
     quizzes: Quiz[];
@@ -25,7 +26,7 @@ function QuizTable({ quizzes, showDelete = false, onDelete, onRowClick }: QuizTa
                     onClick={() => onRowClick && onRowClick(quiz)}
                 >
                     <div className="quiz-name-column">{quiz.name}</div>
-                    <div className="quiz-modified-column">{quiz.modified}</div>
+                    <div className="quiz-modified-column">{formatDateString(quiz.dateCreated)}</div>
                     {showDelete && (
                         <button
                             className="quiz-delete-btn"

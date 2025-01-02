@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./QuizList.css";
 import Divider from "../../components/Divider";
 import { useNavigate } from "react-router-dom";
 import { Quiz } from "../../models/Quiz";
 import QuizTable from "../../components/QuizTable";
+import { useAuth } from "../../hooks/AuthProvider";
+import { quizRepository } from "../../data/repositories/quizRepository";
 
 interface Tab {
     id: string;
@@ -11,26 +13,49 @@ interface Tab {
 }
 
 function QuizList() {
-    const [quizzes, setQuizzes] = useState<Quiz[]>([
-        { id: 1, name: "World Facts Quiz", modified: "12/24/2024" },
-    ]);
-
+    const [quizzes, setQuizzes] = useState<Quiz[]>([]);
     const [activeTab, setActiveTab] = useState("quizzes");
+    const navigate = useNavigate();
+    const auth = useAuth();
+
+    // Fetch quizzes when component mounts
+    useEffect(() => {
+        loadQuizzes();
+    }, []);
 
     const tabs: Tab[] = [
         { id: "quizzes", label: "Quizzes" },
         { id: "deleted", label: "Deleted" },
     ];
 
-    const navigate = useNavigate();
+    async function loadQuizzes() {
+        if (!auth.user?.id) {
+            return;
+        }
+
+        try {
+            const fetchedQuizzes = await quizRepository.getQuizzesForUser(auth.user.id);
+
+            setQuizzes(fetchedQuizzes);
+        } catch (error) {
+            console.error("Failed to fetch quizzes:", error);
+        }
+    }
 
     const addQuiz = () => {
-        navigate("/edit-quiz"); // Navigate to QuizEditorPage
+        navigate("/edit-quiz");
     };
 
-    const deleteQuiz = (id: number) => {
-        setQuizzes(quizzes.filter((quiz) => quiz.id !== id));
-    };
+    async function handleDeleteQuiz(id: number) {
+        try {
+            await quizRepository.deleteQuiz(id);
+
+            // Remove from local state after successful delete
+            setQuizzes((prev) => prev.filter((quiz) => quiz.id !== id));
+        } catch (error) {
+            console.error("Failed to delete quiz:", error);
+        }
+    }
 
     return (
         <div className="quiz-list">
@@ -57,7 +82,7 @@ function QuizList() {
             <Divider color="#E7EDF0" />
 
             {activeTab === "quizzes" && (
-                <QuizTable quizzes={quizzes} showDelete={true} onDelete={deleteQuiz} />
+                <QuizTable quizzes={quizzes} showDelete={true} onDelete={handleDeleteQuiz} />
             )}
 
             {activeTab === "deleted" && (

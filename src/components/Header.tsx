@@ -7,7 +7,7 @@ function Header() {
     const auth = useAuth();
 
     // Use the first room id as the default room as there's currently only support for one room.
-    const defaultRoomId = auth.user?.rooms?.[0]?.room_id || "No Room";
+    const defaultRoomId = auth.user?.rooms?.[0]?.roomId || "No Room";
 
     return (
         <header className="header">
