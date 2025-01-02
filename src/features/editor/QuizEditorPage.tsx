@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './QuizEditorPage.css';
+import '../../styles/QuestionList.css'
 import QuizEditorHeader from './QuizEditorHeader';
 import Divider from '../../components/Divider';
 import EditableQuestion from "./EditableQuestion";

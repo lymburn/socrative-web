@@ -23,9 +23,9 @@ function QuizList() {
         loadQuizzes();
     }, []);
 
+    // Only have quizzes tab, with support for other tabs
     const tabs: Tab[] = [
         { id: "quizzes", label: "Quizzes" },
-        { id: "deleted", label: "Deleted" },
     ];
 
     async function loadQuizzes() {
@@ -82,13 +82,12 @@ function QuizList() {
             <Divider color="#E7EDF0" />
 
             {activeTab === "quizzes" && (
-                <QuizTable quizzes={quizzes} showDelete={true} onDelete={handleDeleteQuiz} />
-            )}
-
-            {activeTab === "deleted" && (
-                <div className="deleted-message">
-                    <p>Deleted quizzes</p>
-                </div>
+                <QuizTable
+                    quizzes={quizzes}
+                    showDelete={true}
+                    onDelete={handleDeleteQuiz}
+                    onRowClick={(quiz) => navigate(`/quiz/${quiz.id}`)}
+                />
             )}
         </div>
     );

@@ -30,7 +30,10 @@ function QuizTable({ quizzes, showDelete = false, onDelete, onRowClick }: QuizTa
                     {showDelete && (
                         <button
                             className="quiz-delete-btn"
-                            onClick={() => onDelete && onDelete(quiz.id)}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                onDelete && onDelete(quiz.id);
+                            }}
                         >
                             Delete
                         </button>

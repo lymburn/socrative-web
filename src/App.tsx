@@ -9,6 +9,7 @@ import QuizEditorPage from "./features/editor/QuizEditorPage";
 import TeacherLogin from './features/auth/TeacherLogin';
 import StudentLogin from './features/auth/StudentLogin';
 import Register from './features/auth/Register';
+import QuizDetailsPage from './features/library/QuizDetailsPage';
 import PrivateRoute from './routes/PrivateRoute';
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
                         <Route path="/library" element={<LibraryPage />} />
                         <Route path="/results" element={<LiveResultsPage />} />
                         <Route path="/edit-quiz" element={<QuizEditorPage />} />
+                        <Route path="/quiz/:quizId" element={<QuizDetailsPage />} />
                     </Route>
                 </Routes>
             </AuthProvider>
