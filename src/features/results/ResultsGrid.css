@@ -1,0 +1,71 @@
+.results-grid {
+    display: grid;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    overflow-x: auto;
+    grid-auto-rows: min-content;
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+/* Header cells */
+.header-cell {
+    margin-bottom: 0.5rem;
+}
+
+.question-header {
+    text-align: center;
+}
+
+.name-score-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #0175A3;
+    font-weight: bold;
+}
+
+/* Student answer cells */
+.student-cell {
+    font-weight: 400;
+    padding: 0.5rem;
+    background-color: #F4F7F8;
+    border-radius: 0.25rem;
+}
+
+.name-score-cell {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.question-cell {
+    text-align: center;
+}
+
+.question-cell.correct {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.question-cell.incorrect {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.question-cell.unanswered {
+    background-color: #F4F7F8;
+    color: #6c757d;
+    font-weight: normal;
+}
+
+/* Class total cells */
+.class-total-cell {
+    padding: 0.5rem;
+    background-color: #E7EDF0;
+    border-radius: 0.25rem;
+}
+
+.question-total {
+    text-align: center;
+}

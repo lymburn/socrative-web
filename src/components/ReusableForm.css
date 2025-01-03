@@ -1,6 +1,5 @@
 /* Full-page layout for the form */
 .reusable-form-page {
-    font-family: Arial, Helvetica, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,19 +51,5 @@
 
 /* Primary button styling */
 .reusable-primary-btn {
-    background-color: #ff9900;
-    color: white;
-    border: none;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    cursor: pointer;
     width: 100%;
-    transition: background-color 0.2s ease;
-    border-radius: 4px;
-    margin-top: 1rem;
-    font-weight: bold;
-}
-
-.reusable-primary-btn:hover {
-    background-color: #cc7a00;
 }

@@ -1,7 +1,8 @@
 import "./QuizTable.css";
 import { Quiz } from "../models/Quiz";
-import Divider from "./Divider";
+import { Divider } from "@mui/material";
 import { formatDateString } from "../utils/dateUtils";
+import { Button } from "@mui/material";
 
 interface QuizTableProps {
     quizzes: Quiz[];
@@ -17,7 +18,7 @@ function QuizTable({ quizzes, showDelete = false, onDelete, onRowClick }: QuizTa
                 <div className="quiz-name-column">NAME</div>
                 <div className="quiz-modified-column">MODIFIED</div>
             </div>
-            <Divider color="#E7EDF0"></Divider>
+            <Divider/>
             {quizzes.map((quiz) => (
                 <div
                     key={quiz.id}
@@ -28,15 +29,17 @@ function QuizTable({ quizzes, showDelete = false, onDelete, onRowClick }: QuizTa
                     <div className="quiz-name-column">{quiz.name}</div>
                     <div className="quiz-modified-column">{formatDateString(quiz.dateCreated)}</div>
                     {showDelete && (
-                        <button
-                            className="quiz-delete-btn"
+                        <Button
+                            variant="contained"
+                            color="destructive"
+                            disableElevation
                             onClick={(e) => {
                                 e.stopPropagation();
                                 onDelete && onDelete(quiz.id);
                             }}
                         >
                             Delete
-                        </button>
+                        </Button>
                     )}
                 </div>
             ))}

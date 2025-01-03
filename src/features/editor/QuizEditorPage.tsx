@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './QuizEditorPage.css';
 import '../../styles/QuestionList.css'
 import QuizEditorHeader from './QuizEditorHeader';
-import Divider from '../../components/Divider';
+import { Divider } from "@mui/material";
 import EditableQuestion from "./EditableQuestion";
 import ReadOnlyQuestion from './ReadOnlyQuestion';
 import { useNavigate } from "react-router-dom";
@@ -121,7 +121,7 @@ function QuizEditorPage({ initialQuizName }: QuizEditorPageProps) {
         <div className="quiz-editor-page">
             <div className="quiz-editor-container">
                 <QuizEditorHeader quizName={quizName} onQuizNameChange={setQuizName} onSave={handleSaveAndExit} />
-                <Divider color="#E7EDF0"></Divider>
+                <Divider/>
 
                 <div className="questions-list">
                     {questions.map((question, index) => (

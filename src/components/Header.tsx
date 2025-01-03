@@ -1,7 +1,8 @@
 import './Header.css';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import logo from "../assets/socrative-logo.png";
 import { useAuth } from "../hooks/AuthProvider";
+import { Button } from '@mui/material';
 
 function Header() {
     const auth = useAuth();
@@ -15,9 +16,21 @@ function Header() {
                 <img src={logo} alt="Socrative Logo" className="logo" />
                 <nav>
                     <ul className="nav-links">
-                        <li><Link to="/launch">Launch</Link></li>
-                        <li><Link to="/library">Library</Link></li>
-                        <li><Link to="/results">Live Results</Link></li>
+                        <li>
+                            <NavLink to="/launch" className={({ isActive }) => (isActive ? "active-link" : "")}>
+                                Launch
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/library" className={({ isActive }) => (isActive ? "active-link" : "")}>
+                                Library
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/results" className={({ isActive }) => (isActive ? "active-link" : "")}>
+                                Live Results
+                            </NavLink>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -26,7 +39,13 @@ function Header() {
                     <li className="room-id">{defaultRoomId}</li>
                     <li className="user-email">{auth.user?.email}</li>
                     <li>
-                        <button className="sign-out-btn" onClick={auth.logout}>Sign Out</button>
+                        <Button
+                            variant="contained"
+                            color="destructive"
+                            disableElevation
+                            onClick={auth.logout}>
+                            Sign Out
+                        </Button>
                     </li>
                 </ul>
             </div>

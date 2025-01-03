@@ -6,7 +6,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { quizRepository } from "../../data/repositories/quizRepository";
 import { Quiz } from "../../models/Quiz";
 import ReadOnlyQuestion from "../editor/ReadOnlyQuestion";
-import Divider from "../../components/Divider";
 
 interface DisplayQuestion {
     questionText: string;
@@ -37,7 +36,6 @@ function QuizDetailsPage() {
 
                 setQuiz(fetchedQuiz);
                 
-                console.log(fetchedQuiz);
                 // Transform each question's answers into (choices, correctAnswerIndex)
                 const mappedQuestions = fetchedQuiz.questions.map((q) => {
                     const choices = q.answers.map((a) => a.text);
@@ -68,8 +66,6 @@ function QuizDetailsPage() {
         <div className="quiz-details-page">
             <div className="quiz-details-container">
                 <h2>{quiz.name}</h2>
-                    <Divider color="#E7EDF0" />
-
                     <div className="questions-list">
                         {questions.map((q, index) => (
                             <ReadOnlyQuestion

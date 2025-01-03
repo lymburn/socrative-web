@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import "./QuizList.css";
-import Divider from "../../components/Divider";
+import { Divider } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { Quiz } from "../../models/Quiz";
 import QuizTable from "../../components/QuizTable";
 import { useAuth } from "../../hooks/AuthProvider";
 import { quizRepository } from "../../data/repositories/quizRepository";
+import { Button } from "@mui/material";
 
 interface Tab {
     id: string;
@@ -73,13 +74,11 @@ function QuizList() {
                 </div>
 
                 <div className="quiz-list-buttons">
-                    <button className="add-quiz-btn" onClick={addQuiz}>
-                        Add Quiz
-                    </button>
+                    <Button variant="contained" color="primary" disableElevation onClick={addQuiz}>Add Quiz</Button>
                 </div>
             </div>
 
-            <Divider color="#E7EDF0" />
+            <Divider/>
 
             {activeTab === "quizzes" && (
                 <QuizTable

@@ -1,13 +1,9 @@
 .quiz-list {
-    font-family: Arial, Helvetica, sans-serif;
     width: 100%;
 }
 
-.quiz-list button {
-    all: unset;
-    font-size: 1rem;
-    font-family: inherit;
-    cursor: pointer;
+.quiz-list-tabs button {
+    background-color: transparent;
 }
 
 .quiz-list-header {
@@ -37,15 +33,4 @@
 .quiz-list-buttons {
     display: flex;
     gap: 2rem;
-}
-
-.quiz-list .add-quiz-btn {
-    color: #fff;
-    background-color: #00B5E2;
-    padding: 0.5rem;
-    border-radius: 0.25rem;
-}
-
-.add-quiz-btn:hover {
-    opacity: 80%;
 }

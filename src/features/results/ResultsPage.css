@@ -1,0 +1,19 @@
+.results-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 70%;
+    margin: 4rem auto;
+    gap: 1.5rem;
+}
+
+.results-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.results-grid-container {
+    width: 80%;
+}

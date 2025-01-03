@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./ReusableForm.css";
+import { Button } from "@mui/material";
 
 interface Field {
     id: string;
@@ -44,9 +45,13 @@ function ReusableForm({ title, fields, primaryButtonText, onSubmit }: ReusableFo
                         />
                     </div>
                 ))}
-                <button onClick={handleSubmit} className="reusable-primary-btn">
+                <Button
+                    variant="contained"
+                    color="yellow"
+                    disableElevation
+                    onClick={handleSubmit} className="reusable-primary-btn">
                     {primaryButtonText}
-                </button>
+                </Button>
             </div>
         </div>
     );

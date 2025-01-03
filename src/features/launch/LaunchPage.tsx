@@ -1,40 +1,54 @@
-import {useState} from "react";
+import { useState, useEffect } from "react";
 import './LaunchPage.css';
 import Header from "../../components/Header";
 import LaunchButton from './LaunchButton';
 import QuizIcon from "../../assets/quiz-icon.png";
-import SpaceshipIcon from "../../assets/spaceship-icon.png";
-import ExitIcon from "../../assets/exit-icon.png";
 import LaunchQuizModal from "./LaunchQuizModal";
+import { Quiz } from "../../models/Quiz";
+import { quizRepository } from "../../data/repositories/quizRepository";
+import { useAuth } from "../../hooks/AuthProvider";
 
-function Launch() {
+function LaunchPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const quizzes = [
-    { id: 1, name: "World Facts Quiz", modified: "12/24/2024" },
-    { id: 2, name: "Math Quiz", modified: "12/22/2024" },
-  ];
+  const [quizzes, setQuizzes] = useState<Quiz[]>([]);
+
+  const auth = useAuth();
+
+  useEffect(() => {
+    loadQuizzes();
+  }, []);
+
+  async function loadQuizzes() {
+    if (!auth.user?.id) {
+      return;
+    }
+    try {
+      const userQuizzes = await quizRepository.getQuizzesForUser(auth.user.id);
+      setQuizzes(userQuizzes);
+    } catch (error) {
+      console.error("Failed to load quizzes for user:", error);
+    }
+  }
 
   return (
     <div className="launch-page">
       <Header />
       <div className="launch-button-container">
         <LaunchButton
-                      icon={QuizIcon}
-                      label="Quiz"
-                      onClick={() => setIsModalOpen(true)}
+          icon={QuizIcon}
+          label="Quiz"
+          onClick={() => setIsModalOpen(true)}
         />
-        <LaunchButton icon={SpaceshipIcon} label="Space Race"></LaunchButton>
-        <LaunchButton icon={ExitIcon} label="Exit Ticket"></LaunchButton>
       </div>
 
       {isModalOpen && (
         <LaunchQuizModal
-            quizzes={quizzes}
-            onClose={() => setIsModalOpen(false)}
+          quizzes={quizzes}
+          onClose={() => setIsModalOpen(false)}
         />
       )}
     </div>
   );
 };
 
-export default Launch;
+export default LaunchPage;

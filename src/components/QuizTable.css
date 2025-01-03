@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     margin: 1rem 0;
+    gap: 1rem;
 }
 
 .quiz-table-columns {
@@ -27,17 +28,4 @@
 .quiz-table-row[data-clickable="true"]:hover {
     background-color: #f5f7f8;
     cursor: pointer;
-}
-
-.quiz-table .quiz-delete-btn {
-    color: #fff;
-    background-color: #ff4d4d;
-    padding: 0.5rem;
-    border-radius: 0.25rem;
-    text-align: center;
-    cursor: pointer;
-}
-
-.quiz-delete-btn:hover {
-    opacity: 80%;
 }
