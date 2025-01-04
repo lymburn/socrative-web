@@ -12,6 +12,7 @@ import TeacherLogin from './features/auth/TeacherLogin';
 import StudentLogin from './features/auth/StudentLogin';
 import Register from './features/auth/Register';
 import QuizDetailsPage from './features/library/QuizDetailsPage';
+import StudentQuizPage from './features/studentquiz/StudentQuizPage';
 import PrivateRoute from './routes/PrivateRoute';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
                         <Route path="/teacher-login" element={<TeacherLogin />} />
                         <Route path="/student-login" element={<StudentLogin />} />
                         <Route path="/register" element={<Register />} />
+                        <Route path="/student-quiz" element={<StudentQuizPage />} />
 
                         {/* Private Routes */}
                         <Route element={<PrivateRoute />}>

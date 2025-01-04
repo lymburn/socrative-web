@@ -1,7 +1,4 @@
-// src/api/quizApi.ts
-
-import apiClient from "./apiClient";  // your configured axios instance
-import { Quiz } from "../models/Quiz";
+import apiClient from "./apiClient";
 import { QuizRequest } from "../models/payload/QuizRequest";
 import { QuizResponse } from "../models/payload/QuizResponse";
 import { QuizzesResponse } from "../models/payload/QuizzesResponse";

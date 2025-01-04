@@ -1,0 +1,45 @@
+.student-quiz-container {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.student-quiz-header {
+    display: flex;
+    justify-content: center;
+    padding: 3rem 0;
+    background-color:#6D9EC4;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.student-room-id {
+    color: #fff;
+    font-size: 2rem;
+}
+
+.question-display {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 70%;
+    align-items: flex-start;
+}
+
+.question-index-text {
+    font-size: 2rem;
+    margin: 2rem 0;
+}
+
+.question-text {
+    font-size: 1.5rem;
+}
+
+.submit-answer-buton {
+    align-self: flex-start;
+    width: 30%;
+}

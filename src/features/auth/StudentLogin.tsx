@@ -1,19 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import ReusableForm from "../../components/ReusableForm";
+import { authRepository } from "../../data/repositories/authRepository";
 
 function StudentLogin() {
     const navigate = useNavigate();
 
-    const handleJoinRoom = (formData: Record<string, string>) => {
-        const { roomName, studentName } = formData;
+    const handleJoinRoom = async (formData: Record<string, string>) => {
+        const { roomId, studentName } = formData;
+        await authRepository.joinRoom(studentName, roomId);
 
-        // Basic empty validation
-        if (!roomName || !studentName) {
-            alert("Please fill in both Room Name and Your Name.");
-            return;
-        }
-
-        navigate("/student-room");
+        navigate("/");
     };
 
     return (

@@ -1,0 +1,50 @@
+.choice-selection-view {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.choice-selection-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.option-button {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    background-color: transparent;
+    gap: 1rem;
+}
+
+.option-label {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 1px solid black;
+    font-weight: bold;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.option-text {
+    text-align: left;
+    flex: 1;
+    border: 1px solid #6D9EC4;
+    border-radius: 0.25rem;
+    padding: 1rem 0.5rem;
+}
+
+.option-button.selected .option-label {
+    color: #fff;
+    background-color: #6D9EC4;
+    border-color: #6D9EC4;
+}
+
+.option-button.selected .option-text {
+    background-color: rgba(109, 158, 196, 0.2);
+}

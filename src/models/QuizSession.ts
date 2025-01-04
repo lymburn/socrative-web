@@ -6,5 +6,4 @@ export interface QuizSession {
     quizId: number;
     roomId: string;
     isPaused: boolean;
-    isActive: boolean;
 }
