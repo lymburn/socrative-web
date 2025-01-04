@@ -7,16 +7,22 @@ function StudentLogin() {
 
     const handleJoinRoom = async (formData: Record<string, string>) => {
         const { roomId, studentName } = formData;
-        await authRepository.joinRoom(studentName, roomId);
 
-        navigate("/");
+        try {
+            await authRepository.joinRoom(studentName, roomId);
+
+            navigate(`/student-quiz?roomId=${roomId}`);
+        } catch (error) {
+            console.error("Failed to join room:", error);
+            alert("Failed to join room. Please try again.");
+        }
     };
 
     return (
         <ReusableForm
             title="Student Login"
             fields={[
-                { id: "roomName", label: "Room Name", placeholder: "Enter the room name", type: "text" },
+                { id: "roomId", label: "Room Name", placeholder: "Enter the room name", type: "text" },
                 { id: "studentName", label: "Your Name", placeholder: "Enter your name", type: "text" },
             ]}
             primaryButtonText="JOIN ROOM"

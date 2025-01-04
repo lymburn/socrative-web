@@ -47,6 +47,13 @@ function QuizEditorPage({ initialQuizName }: QuizEditorPageProps) {
 
     const saveQuestion = (index: number) => {
         const questionToSave = editingQuestions[index];
+
+        // Ensure a correct answer is selected
+        if (questionToSave.correctAnswerIndex === null) {
+            alert("Please select a correct answer before saving the question");
+            return;
+        }
+
         setQuestions([...questions, { ...questionToSave, saved: true }]); // Move to saved list
         const updatedEditingQuestions = [...editingQuestions];
         updatedEditingQuestions.splice(index, 1); // Remove from editing list
