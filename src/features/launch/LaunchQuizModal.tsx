@@ -2,17 +2,30 @@ import "./LaunchQuizModal.css";
 import { Quiz } from "../../models/Quiz";
 import QuizTable from "../../components/QuizTable";
 import { useNavigate } from "react-router-dom";
+import { quizSessionRepository } from "../../data/repositories/quizSessionRepository";
 
 interface LaunchQuizModalProps {
     quizzes: Quiz[];
+    roomId: string;
     onClose: () => void;
 }
 
-function LaunchQuizModal({ quizzes, onClose }: LaunchQuizModalProps) {
+function LaunchQuizModal({ quizzes, roomId, onClose }: LaunchQuizModalProps) {
     const navigate = useNavigate();
 
-    const handleQuizSelection = (quiz: Quiz) => {
-        navigate(`/results/`); // Navigate to the results page
+    const handleQuizSelection = async (quiz: Quiz) => {
+        try {
+            const request = {
+                quizId: quiz.id,
+                roomId,
+            };
+
+            const session = await quizSessionRepository.createQuizSession(request);
+            navigate(`/results/${session.id}`);
+        } catch (error) {
+            console.error("Failed to launch quiz session:", error);
+            alert("Could not launch quiz session. Please try again.");
+        }
     };
 
     return (

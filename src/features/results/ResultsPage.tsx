@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
 import './ResultsPage.css';
 import Header from "../../components/Header";
@@ -6,6 +7,8 @@ import ResultsButtons from './ResultsButtons';
 import ResultsToggles from './ResultsToggles';
 import { Divider } from '@mui/material';
 import ResultsGrid from "./ResultsGrid";
+import { quizSessionRepository } from "../../data/repositories/quizSessionRepository";
+import { useAuth } from "../../hooks/AuthProvider";
 
 function ResultsPage() {
   const quizTitle = "World Facts Quiz";
@@ -24,6 +27,10 @@ function ResultsPage() {
     },
   ];
   const classTotalScores = ["100%", "0%", "0%", "0%", "0%"];
+
+  const auth = useAuth();
+  const { sessionId } = useParams<{ sessionId: string }>();
+  const navigate = useNavigate();
 
   // Toggles
   const [showNames, setShowNames] = useState(true);
@@ -44,12 +51,58 @@ function ResultsPage() {
     })),
   }));
 
+
+  useEffect(() => {
+    if (sessionId) {
+      // If sessionId exists, no need to check active session
+      // loadSessionData();
+    } else {
+      // Otherwise, fetch active session for the user's room
+      fetchActiveSession();
+    }
+  }, [sessionId]);
+
+
+  const fetchActiveSession = async () => {
+    const roomId = auth.user?.rooms?.[0]?.roomId;
+
+    if (!roomId) {
+      alert("No active room found.");
+      return;
+    }
+
+    try {
+      const activeSession = await quizSessionRepository.getActiveSessionByRoom(roomId);
+      
+      console.log(activeSession);
+      if (activeSession && activeSession.id) {
+        navigate(`/results/${activeSession.id}`);
+      } else {
+        alert("No active quiz session found.");
+      }
+    } catch (error) {
+      console.error("Failed to fetch active session:", error);
+      alert("No active session.");
+    }
+  };
+
   const handlePause = () => {
     console.log("Pause clicked");
   };
 
-  const handleFinish = () => {
-    console.log("Finish clicked");
+  const handleFinish = async () => {
+    if (!sessionId) {
+      alert("No session ID provided.");
+      return;
+    }
+
+    try {
+      await quizSessionRepository.deleteQuizSession(Number(sessionId));
+      alert("Quiz session finished.");
+    } catch (error) {
+      console.error("Failed to finish quiz session:", error);
+      alert("Failed to finish the quiz session.");
+    }
   };
 
   return (

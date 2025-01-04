@@ -4,6 +4,7 @@ import apiClient from "./apiClient";  // your configured axios instance
 import { Quiz } from "../models/Quiz";
 import { QuizRequest } from "../models/payload/QuizRequest";
 import { QuizResponse } from "../models/payload/QuizResponse";
+import { QuizzesResponse } from "../models/payload/QuizzesResponse";
 
 export const quizApi = {
   /**
@@ -21,7 +22,7 @@ export const quizApi = {
    * @param userId - the user’s ID
    * @returns An array of Quiz
    */
-  getQuizzesByUser: async (userId: number): Promise<Quiz[]> => {
+  getQuizzesByUser: async (userId: number): Promise<QuizzesResponse> => {
     const response = await apiClient.get(`/quiz?userId=${userId}`);
     return response.data; 
   },
@@ -31,7 +32,7 @@ export const quizApi = {
    * @param quizId - the quiz's ID
    * @returns The quiz object
    */
-  getQuizById: async (quizId: number): Promise<Quiz> => {
+  getQuizById: async (quizId: number): Promise<QuizResponse> => {
     const response = await apiClient.get(`/quiz/${quizId}`);
     return response.data; 
   },

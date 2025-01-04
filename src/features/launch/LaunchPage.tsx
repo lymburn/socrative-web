@@ -11,8 +11,9 @@ import { useAuth } from "../../hooks/AuthProvider";
 function LaunchPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
-
   const auth = useAuth();
+
+  const defaultRoomId = auth.user?.rooms?.[0]?.roomId
 
   useEffect(() => {
     loadQuizzes();
@@ -22,6 +23,7 @@ function LaunchPage() {
     if (!auth.user?.id) {
       return;
     }
+
     try {
       const userQuizzes = await quizRepository.getQuizzesForUser(auth.user.id);
       setQuizzes(userQuizzes);
@@ -30,6 +32,16 @@ function LaunchPage() {
     }
   }
 
+  const handleOpenModal = () => {
+    if (!defaultRoomId) {
+      alert("No room found. Please create a room before launching a quiz.");
+      return;
+    }
+
+    setIsModalOpen(true);
+  };
+
+
   return (
     <div className="launch-page">
       <Header />
@@ -37,13 +49,14 @@ function LaunchPage() {
         <LaunchButton
           icon={QuizIcon}
           label="Quiz"
-          onClick={() => setIsModalOpen(true)}
+          onClick={handleOpenModal}
         />
       </div>
 
       {isModalOpen && (
         <LaunchQuizModal
           quizzes={quizzes}
+          roomId={defaultRoomId!} // Can pass in default room id since modal can't be opened if it's null
           onClose={() => setIsModalOpen(false)}
         />
       )}

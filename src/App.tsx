@@ -30,7 +30,8 @@ function App() {
                         <Route element={<PrivateRoute />}>
                             <Route path="/launch" element={<LaunchPage />} />
                             <Route path="/library" element={<LibraryPage />} />
-                            <Route path="/results" element={<ResultsPage />} />
+                            <Route path="/results/" element={<ResultsPage />} />
+                            <Route path="/results/:sessionId" element={<ResultsPage />} />
                             <Route path="/edit-quiz" element={<QuizEditorPage />} />
                             <Route path="/quiz/:quizId" element={<QuizDetailsPage />} />
                         </Route>

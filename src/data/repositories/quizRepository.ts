@@ -1,5 +1,3 @@
-// src/repositories/quizRepository.ts
-
 import { quizApi } from "../../api/quizApi";
 import { Quiz } from "../../models/Quiz";
 import { QuizRequest } from "../../models/payload/QuizRequest";
@@ -17,16 +15,16 @@ export const quizRepository = {
    * Retrieve quizzes for a specific user
    */
   getQuizzesForUser: async (userId: number): Promise<Quiz[]> => {
-    const quizzes = await quizApi.getQuizzesByUser(userId);
-    return quizzes;
+    const response = await quizApi.getQuizzesByUser(userId);
+    return response.quizzes;
   },
 
   /**
    * Get a single quiz by ID
    */
   getQuizById: async (quizId: number): Promise<Quiz> => {
-    const quiz = await quizApi.getQuizById(quizId);
-    return quiz;
+    const response = await quizApi.getQuizById(quizId);
+    return response.quiz;
   },
 
   /**
