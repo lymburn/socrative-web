@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const API_BASE_URL = process.env.NODE_ENV === "production"
-? "https://socrative-service.vercel.app"
-: "http://localhost:5000";
+? process.env.PROD_API_URL
+: process.env.DEV_API_URL;
 
 const apiClient = axios.create({
     baseURL: API_BASE_URL,
