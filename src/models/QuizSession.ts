@@ -5,5 +5,4 @@ export interface QuizSession {
     id?: number;
     quizId: number;
     roomId: string;
-    isPaused: boolean;
 }

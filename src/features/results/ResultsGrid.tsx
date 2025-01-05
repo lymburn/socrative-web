@@ -1,14 +1,9 @@
 import "./ResultsGrid.css";
-import { Answer } from "../../models/Answer";
-
-interface StudentResult {
-    name: string; // Student's name
-    score: string; // Student's total score as a percentage
-    answers: { text: string; displayText: string; displayClass: string }[]; // Array of answers for each question
-}
+import { StudentResult } from "../../models/StudentResult";
+import { Question } from "../../models/Question";
 
 interface ResultsGridProps {
-    questions: string[]; // Array of question titles
+    questions: Question[]; // Array of question objects
     studentResults: StudentResult[]; // Array of student results
     classTotalScores: string[]; // Array of class scores for each question
 }
@@ -30,7 +25,7 @@ function ResultsGrid({
             </div>
             {questions.map((q, index) => (
                 <div key={`header-${index}`} className="header-cell question-header">
-                    {q}
+                    {index + 1}
                 </div>
             ))}
 
@@ -39,15 +34,14 @@ function ResultsGrid({
                 <>
                     <div key={`name-score-${rowIndex}`} className="student-cell name-score-cell">
                         <div className="student-name">{student.name}</div>
-                        {<div className="student-score">{student.score}</div>}
+                        <div className="student-score">{student.score}</div>
                     </div>
                     {student.answers.map((answer, colIndex) => (
-                        
                         <div
                             key={`answer-${rowIndex}-${colIndex}`}
-                            className={`student-cell question-cell ${answer.displayClass}`}
+                            className={`student-cell question-cell ${answer.status}`}
                         >
-                            {answer.displayText}
+                            {answer.text}
                         </div>
                     ))}
                 </>

@@ -1,5 +1,6 @@
 import { QuizSessionRequest } from "../models/payload/QuizSessionRequest";
 import { QuizSessionResponse } from "../models/payload/QuizSessionResponse";
+import { QuizSessionResultResponse } from "../models/payload/QuizSessionResultResponse";
 import apiClient from "./apiClient";
 
 export const quizSessionApi = {
@@ -17,4 +18,14 @@ export const quizSessionApi = {
         const response = await apiClient.get(`/quiz-session?roomId=${roomId}`);
         return response.data;
     },
+
+    getQuizSessionById: async (sessionId: number): Promise<QuizSessionResponse> => {
+        const response = await apiClient.get(`/quiz-session/${sessionId}`);
+        return response.data;
+    },
+
+    getQuizSessionResults: async (sessionId: number): Promise<QuizSessionResultResponse> => {
+        const response = await apiClient.get(`/quiz-session/${sessionId}/results`);
+        return response.data;
+    }
 }
