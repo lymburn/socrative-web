@@ -4,11 +4,9 @@ import "../../styles/Question.css";
 interface EditableQuestionProps {
     questionNumber: number;
     questionText: string;
-    points: number;
     choices: string[];
     correctAnswerIndex: number | null;
     onQuestionChange: (newQuestion: string) => void;
-    onPointsChange: (newPoints: number) => void;
     onChoiceChange: (index: number, newChoice: string) => void;
     onSelectCorrectAnswer: (index: number) => void;
     onSave: () => void;
@@ -18,21 +16,14 @@ interface EditableQuestionProps {
 function EditableQuestion({
     questionNumber,
     questionText,
-    points,
     choices,
     correctAnswerIndex,
     onQuestionChange,
-    onPointsChange,
     onChoiceChange,
     onSelectCorrectAnswer,
     onSave,
     onDelete,
 }: EditableQuestionProps) {
-    const handlePointsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = Math.max(0, Number(e.target.value));
-        onPointsChange(value);
-    }
-
     return (
         <div className="editable-question-container">
             <div className="editable-question-details">
@@ -45,14 +36,6 @@ function EditableQuestion({
                         onChange={(e) => onQuestionChange(e.target.value)}
                         placeholder="Type your question here..."
                     />
-                    <input
-                        type="number"
-                        className="points-input"
-                        value={points}
-                        onChange={handlePointsChange}
-                        placeholder="0"
-                    />
-                    <span>points</span>
                 </div>
                 <div className="choices-container">
                     {choices.map((choice, index) => (

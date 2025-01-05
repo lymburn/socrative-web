@@ -4,7 +4,6 @@ import "../../styles/Question.css";
 interface ReadOnlyQuestionProps {
     questionNumber: number;
     questionText: string;
-    points: number;
     choices: string[];
     correctAnswerIndex: number | null;
 }
@@ -12,7 +11,6 @@ interface ReadOnlyQuestionProps {
 function ReadOnlyQuestion({
     questionNumber,
     questionText,
-    points,
     choices,
     correctAnswerIndex
 }: ReadOnlyQuestionProps) {
@@ -22,7 +20,6 @@ function ReadOnlyQuestion({
                 <span className="question-number">{questionNumber}.</span>
                 <div className="question-details-container">
                     <div className="question-title">{questionText}</div>
-                    <div className="question-points">{points} POINTS</div>
                 </div>
             </div>
 

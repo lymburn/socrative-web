@@ -15,7 +15,6 @@ interface QuizEditorPageProps {
 
 interface QuestionData {
     questionText: string;
-    points: number;
     choices: string[];
     correctAnswerIndex: number | null;
     saved: boolean;
@@ -36,7 +35,6 @@ function QuizEditorPage({ initialQuizName }: QuizEditorPageProps) {
             setEditingQuestions([
                 {
                     questionText: "",
-                    points: 0,
                     choices: ["", "", "", ""],
                     correctAnswerIndex: null,
                     saved: false,
@@ -72,12 +70,6 @@ function QuizEditorPage({ initialQuizName }: QuizEditorPageProps) {
         setEditingQuestions(updatedEditingQuestions);
     };
 
-    const updatePoints = (index: number, newPoints: number) => {
-        const updatedEditingQuestions = [...editingQuestions];
-        updatedEditingQuestions[index].points = newPoints;
-        setEditingQuestions(updatedEditingQuestions);
-    };
-
     const updateChoice = (questionIndex: number, choiceIndex: number, newChoice: string) => {
         const updatedEditingQuestions = [...editingQuestions];
         updatedEditingQuestions[questionIndex].choices[choiceIndex] = newChoice;
@@ -102,7 +94,6 @@ function QuizEditorPage({ initialQuizName }: QuizEditorPageProps) {
             // So only “saved” questions go into the quiz and the editing question is discarded
             const questionPayloads = questions.map((q) => ({
                 question: q.questionText,
-                points: q.points,
                 answers: q.choices.map((choice, idx) => ({
                 text: choice,
                 isCorrect: q.correctAnswerIndex === idx,
@@ -136,7 +127,6 @@ function QuizEditorPage({ initialQuizName }: QuizEditorPageProps) {
                             key={`saved-${index}`}
                             questionNumber={index + 1}
                             questionText={question.questionText}
-                            points={question.points}
                             choices={question.choices}
                             correctAnswerIndex={question.correctAnswerIndex}
                         />
@@ -147,11 +137,9 @@ function QuizEditorPage({ initialQuizName }: QuizEditorPageProps) {
                             key={`editing-${index}`}
                             questionNumber={questions.length + index + 1}
                             questionText={question.questionText}
-                            points={question.points}
                             choices={question.choices}
                             correctAnswerIndex={question.correctAnswerIndex}
                             onQuestionChange={(newText) => updateQuestion(index, newText)}
-                            onPointsChange={(newPoints) => updatePoints(index, newPoints)}
                             onChoiceChange={(choiceIndex, newChoice) => updateChoice(index, choiceIndex, newChoice)}
                             onSelectCorrectAnswer={(choiceIndex) => selectCorrectAnswer(index, choiceIndex)}
                             onSave={() => saveQuestion(index)}

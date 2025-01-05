@@ -6,41 +6,43 @@ import { Quiz } from "../../models/Quiz";
 import { Button } from "@mui/material";
 import { quizRepository } from "../../data/repositories/quizRepository";
 import { quizSessionRepository } from "../../data/repositories/quizSessionRepository";
+import { studentAnswerRepository } from "../../data/repositories/studentAnswerRepository";
 
 function StudentQuizPage() {
     const [searchParams] = useSearchParams();
     const roomId = searchParams.get("roomId");
+    const studentId = Number(searchParams.get("studentId"));
     const [quiz, setQuiz] = useState<Quiz | null>(null);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedAnswerId, setSelectedAnswerId] = useState<number | undefined>(undefined);
     const [errorMessage, setErrorMessage] = useState("");
 
+
     useEffect(() => {
-        const fetchQuizSession = async () => {
-            try {
-                // Fetch active session by room
-                const session = await quizSessionRepository.getActiveSessionByRoom(roomId!);
-                if (!session) {
-                    setErrorMessage("No running quiz.");
-                    return;
-                }
-
-                // Fetch the quiz details by quiz ID
-                const fetchedQuiz = await quizRepository.getQuizById(session.quizId);
-                setQuiz(fetchedQuiz);
-            } catch (error) {
-                console.error("Failed to fetch session or quiz:", error);
-                setErrorMessage("Error loading quiz session. Ensure there is a running session.");
-            } finally {
-            }
-        };
-
-        if (roomId) {
-            fetchQuizSession();
+        if (roomId && studentId) {
+            initializeQuizSession(roomId, studentId);
         } else {
-            setErrorMessage("No room ID provided.");
+            setErrorMessage("Missing room ID or student ID.");
         }
-    }, [roomId]);
+    }, [roomId, studentId]);
+
+    const initializeQuizSession = async (roomId: string, studentId: number) => {
+        try {
+            const session = await quizSessionRepository.getActiveSessionByRoom(roomId);
+            const quiz = await quizRepository.getQuizById(session.quizId);
+            const studentAnswers = await studentAnswerRepository.getStudentAnswers(studentId);
+            const answeredQuestionIds = studentAnswers.map((answer) => answer.questionId);
+            
+            // Skip the the current unanswered question index to avoid duplicate submissions
+            const firstUnansweredIndex = quiz.questions.findIndex((question) => !answeredQuestionIds.includes(question.id!)) ?? 0;
+
+            setQuiz(quiz);
+            setCurrentQuestionIndex(firstUnansweredIndex);
+        } catch (error) {
+            console.error("Error initializing quiz session:", error);
+            setErrorMessage("Failed to initialize quiz session. Please try again.");
+        }
+    };
 
     const handleSelect = (id: number) => {
         setSelectedAnswerId(id);
@@ -48,29 +50,36 @@ function StudentQuizPage() {
 
     const currentQuestion = quiz?.questions[currentQuestionIndex];
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (!selectedAnswerId) {
             alert("Please select an answer before submitting.");
             return;
         }
 
-        console.log(selectedAnswerId);
-        console.log(currentQuestion?.answers);
-        const selectedAnswer = currentQuestion?.answers.find(
-            (answer) => answer.id === selectedAnswerId
-        );
+        try {
+            // Submit the answer
+            await studentAnswerRepository.createStudentAnswer({
+                studentId,
+                questionId: currentQuestion!.id!,
+                answerId: selectedAnswerId,
+            });
 
-        if (selectedAnswer?.isCorrect) {
-            alert("Correct!");
-        } else {
-            alert("Incorrect.");
-        }
+            const selectedAnswer = currentQuestion?.answers.find(
+                (answer) => answer.id === selectedAnswerId
+            );
 
-        if (currentQuestionIndex < (quiz?.questions.length ?? 0) - 1) {
-            setSelectedAnswerId(undefined); // Reset selection for the next question
-            setCurrentQuestionIndex(currentQuestionIndex + 1);
-        } else {
-            alert("You've completed the quiz!");
+            alert(selectedAnswer?.isCorrect ? "Correct!" : "Incorrect.");
+
+            // Move to the next question or finish the quiz
+            if (currentQuestionIndex < (quiz?.questions.length ?? 0) - 1) {
+                setSelectedAnswerId(undefined);
+                setCurrentQuestionIndex(currentQuestionIndex + 1);
+            } else {
+                alert("You've completed the quiz!");
+            }
+        } catch (error) {
+            console.error("Failed to submit the answer:", error);
+            alert("Error submitting your answer. Please try again.");
         }
     };
 

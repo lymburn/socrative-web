@@ -9,7 +9,6 @@ import ReadOnlyQuestion from "../editor/ReadOnlyQuestion";
 
 interface DisplayQuestion {
     questionText: string;
-    points: number;
     choices: string[];
     correctAnswerIndex: number | null;
 }
@@ -42,7 +41,6 @@ function QuizDetailsPage() {
                     const correctAnswerIndex = q.answers.findIndex((a) => a.isCorrect);
                     return {
                         questionText: q.question,
-                        points: q.points,
                         choices,
                         correctAnswerIndex: correctAnswerIndex >= 0 ? correctAnswerIndex : null,
                     };
@@ -72,7 +70,6 @@ function QuizDetailsPage() {
                                 key={index}
                                 questionNumber={index + 1}
                                 questionText={q.questionText}
-                                points={q.points}
                                 choices={q.choices}
                                 correctAnswerIndex={q.correctAnswerIndex}
                             />

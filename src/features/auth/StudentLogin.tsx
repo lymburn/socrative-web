@@ -9,9 +9,9 @@ function StudentLogin() {
         const { roomId, studentName } = formData;
 
         try {
-            await authRepository.joinRoom(studentName, roomId);
-
-            navigate(`/student-quiz?roomId=${roomId}`);
+            const student = await authRepository.joinRoom(studentName, roomId);
+            
+            navigate(`/student-quiz?roomId=${roomId}&studentId=${student.id}`);
         } catch (error) {
             console.error("Failed to join room:", error);
             alert("Failed to join room. Please try again.");
