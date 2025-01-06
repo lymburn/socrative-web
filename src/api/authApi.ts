@@ -6,20 +6,17 @@ import apiClient from "./apiClient";
 
 export const authApi = {
     register: async (request: AuthRequest): Promise<AuthResponse> => {
-        const { email, password } = request;
-        const response = await apiClient.post("/auth/register", { email, password });
+        const response = await apiClient.post("/auth/register", request);
         return response.data;
     },
 
     login: async (request: AuthRequest): Promise<AuthResponse> => {
-        const { email, password } = request;
-        const response = await apiClient.post("/auth/login/teacher", { email, password });
+        const response = await apiClient.post("/auth/login/teacher", request);
         return response.data;
     },
 
     joinRoom: async (request: StudentRequest): Promise<StudentResponse> => {
-        const { name, roomId } = request;
-        const response = await apiClient.post("/auth/login/student", { name, roomId });
+        const response = await apiClient.post("/auth/login/student", request);
         return response.data
     }
 };

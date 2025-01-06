@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import ReusableForm from "../../components/ReusableForm";
 import { authRepository } from "../../data/repositories/authRepository";
+import { quizSessionRepository } from "../../data/repositories/quizSessionRepository";
 
 function StudentLogin() {
     const navigate = useNavigate();
@@ -9,7 +10,13 @@ function StudentLogin() {
         const { roomId, studentName } = formData;
 
         try {
-            const student = await authRepository.joinRoom(studentName, roomId);
+            const session = await quizSessionRepository.getActiveSessionByRoom(roomId);
+
+            if (!session || !session.id) {
+                throw Error("No session found");
+            }
+            
+            const student = await authRepository.joinRoom(studentName, roomId, session.id);
             
             navigate(`/student-quiz?roomId=${roomId}&studentId=${student.id}`);
         } catch (error) {

@@ -1,8 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = process.env.NODE_ENV === "production"
-? process.env.PROD_API_URL
-: process.env.DEV_API_URL;
+const API_BASE_URL = "http://localhost:3000";
 
 const apiClient = axios.create({
     baseURL: API_BASE_URL,
@@ -12,6 +10,7 @@ const apiClient = axios.create({
     withCredentials: true,
 });
 
+// Attach JWT token to every request if available
 apiClient.interceptors.request.use((config) => {
     const token = localStorage.getItem("jwt");
     if (token) {

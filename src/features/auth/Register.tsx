@@ -1,9 +1,9 @@
-import { useAuth } from "../../hooks/AuthProvider";
 import { authRepository } from "../../data/repositories/authRepository";
 import ReusableForm from "../../components/ReusableForm";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
-    const auth = useAuth()
+    const navigate = useNavigate();
 
     const handleRegister = async (formData: Record<string, string>) => {
         const { email, password } = formData;
@@ -16,7 +16,7 @@ function Register() {
 
         try {
             await authRepository.register(email, password);
-            auth.login(email, password);
+            navigate("/teacher-login");
         } catch (error: any) {
             alert(error.message);
         }

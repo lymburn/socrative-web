@@ -5,9 +5,8 @@ import apiClient from "./apiClient";
 
 export const quizSessionApi = {
     launchQuizSession: async (request: QuizSessionRequest): Promise<QuizSessionResponse> => {
-        const { quizId, roomId } = request
-        const response = await apiClient.post("/quiz-session/", { quizId, roomId });
-        return response.data;
+        const { data } = await apiClient.post("/quiz-session", request);
+        return data;
     },
 
     finishQuizSession: async (sessionId: number): Promise<void> => {
@@ -15,17 +14,17 @@ export const quizSessionApi = {
     },
 
     getQuizSessionByRoom: async (roomId: string): Promise<QuizSessionResponse> => {
-        const response = await apiClient.get(`/quiz-session?roomId=${roomId}`);
-        return response.data;
+        const { data } = await apiClient.get("/quiz-session", { params: { roomId } });
+        return data;
     },
 
     getQuizSessionById: async (sessionId: number): Promise<QuizSessionResponse> => {
-        const response = await apiClient.get(`/quiz-session/${sessionId}`);
-        return response.data;
+        const { data } = await apiClient.get(`/quiz-session/${sessionId}`);
+        return data;
     },
 
     getQuizSessionResults: async (sessionId: number): Promise<QuizSessionResultResponse> => {
-        const response = await apiClient.get(`/quiz-session/${sessionId}/results`);
-        return response.data;
+        const { data } = await apiClient.get(`/quiz-session/${sessionId}/results`);
+        return data;
     }
-}
+};

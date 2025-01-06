@@ -24,7 +24,7 @@ function ResultsPage() {
   const [studentResults, setStudentResults] = useState<StudentResult[]>([]);
   const [classTotalScores, setClassTotalScores] = useState<string[]>([]);
 
-
+  // Toggles
   const [showNames, setShowNames] = useState(true);
   const [showResponses, setShowResponses] = useState(true);
   const [showResults, setShowResults] = useState(true);
@@ -36,8 +36,6 @@ function ResultsPage() {
   // Reprocess results when toggles change
   useEffect(() => {
     setStudentResults(processStudentResults(rawStudentResults, questions, showNames, showResponses, showResults));
-    console.log(rawStudentResults);
-    console.log(studentResults);
   }, [rawStudentResults, questions, showNames, showResponses, showResults]);
 
   const fetchActiveSession = async () => {

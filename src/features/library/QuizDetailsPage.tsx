@@ -19,40 +19,40 @@ function QuizDetailsPage() {
     const [questions, setQuestions] = useState<DisplayQuestion[]>([]);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (!quizId) return;
+    async function loadQuiz() {
+        try {
+            if (!quizId) return;
 
-        async function loadQuiz() {
-            try {
-                const fetchedQuiz = await quizRepository.getQuizById(Number(quizId));
+            const fetchedQuiz = await quizRepository.getQuizById(Number(quizId));
 
-                // Go back to library if not found
-                if (!fetchedQuiz) {
-                    alert("Quiz not found!");
-                    navigate("/library");
-                    return;
-                }
-
-                setQuiz(fetchedQuiz);
-                
-                // Transform each question's answers into (choices, correctAnswerIndex)
-                const mappedQuestions = fetchedQuiz.questions.map((q) => {
-                    const choices = q.answers.map((a) => a.text);
-                    const correctAnswerIndex = q.answers.findIndex((a) => a.isCorrect);
-                    return {
-                        questionText: q.question,
-                        choices,
-                        correctAnswerIndex: correctAnswerIndex >= 0 ? correctAnswerIndex : null,
-                    };
-                });
-
-                setQuestions(mappedQuestions);
-            } catch (error) {
-                console.error("Failed to load quiz:", error);
+            // Go back to library if not found
+            if (!fetchedQuiz) {
+                alert("Quiz not found!");
                 navigate("/library");
+                return;
             }
-        }
 
+            setQuiz(fetchedQuiz);
+            
+            // Transform each question's answers into (choices, correctAnswerIndex)
+            const mappedQuestions = fetchedQuiz.questions.map((q) => {
+                const choices = q.answers.map((a) => a.text);
+                const correctAnswerIndex = q.answers.findIndex((a) => a.isCorrect);
+                return {
+                    questionText: q.question,
+                    choices,
+                    correctAnswerIndex: correctAnswerIndex >= 0 ? correctAnswerIndex : null,
+                };
+            });
+
+            setQuestions(mappedQuestions);
+        } catch (error) {
+            console.error("Failed to load quiz:", error);
+            navigate("/library");
+        }
+    }
+
+    useEffect(() => {
         loadQuiz();
     }, [quizId, navigate]);
 
