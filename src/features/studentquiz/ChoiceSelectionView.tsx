@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./ChoiceSelectionView.css";
 import { Answer } from "../../models/Answer";
 

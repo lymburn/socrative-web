@@ -23,7 +23,7 @@ function ResultsGrid({
                 <div>NAME</div>
                 <div>SCORE%</div>
             </div>
-            {questions.map((q, index) => (
+            {questions.map((_, index) => (
                 <div key={`header-${index}`} className="header-cell question-header">
                     {index + 1}
                 </div>

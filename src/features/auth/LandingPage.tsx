@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import "./LandingPage.css";
-import { Button } from "@mui/material";
 
 function LandingPage() {
     const navigate = useNavigate();
