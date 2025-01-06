@@ -1,50 +1,44 @@
-# React + TypeScript + Vite
+# Socrative Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a “clone” of the Socrative frontend, built using React and TypeScript. To maintain simplicity, I utilized raw CSS instead of relying on libraries. Through this project, I gained valuable insights into React and found many similarities and differences to iOS development, especially in how components are structured. While there are numerous areas for improvement, I hope this project demonstrates my ability to quickly learn and adapt to new tools, as well as my committment to quickly ramping up on the Socrative team.
 
-Currently, two official plugins are available:
+Some potential improvements with more time could include:
+- Implementing global state management like Redux (skipped in interest of time).
+- Adding unit tests and making components more testable.
+- More robust error handling and fallbacks behaviours.
+- Utilizing WebSockets for real-time live results.
+- Modularizing features into smaller, reusable components.
+- Enhancing the styling, as CSS posed the most notable differences compared to iOS layouts.
+- Improving authentication and security flow.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
 
-## Expanding the ESLint configuration
+1. **Clone the Repository**
+   `git clone https://github.com/lymburn/socrative-web.git`
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+2. **Install dependencies**  
+   `npm install`
 
-- Configure the top-level `parserOptions` property like this:
+4. **Start the service**  
+    `npm run dev`
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Features
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Authentication
+- Registration: Allow teachers to create an account.
+- Teacher Login: Secure login for teachers.
+- Student Room Join: Simple interface for students to join a quiz session by providing their name and room ID.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Quiz Management
+- Quiz Editor: Create and delete quizzes with questions and answer options.
+- Quiz Library: View all quizzes created by a teacher.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### Quiz Sessions
+- Launch Quiz: Teachers can start a quiz session in their assigned room.
+- Live Quiz Participation: Students can interact with ongoing quizzes and submit answers in real time.
+
+### Results Visualization
+- Student Results: View detailed responses and scores for each student, with toggles to show or hide names, responses, and results.
+
+### Student Quiz
+- Quiz Submissions: Quiz flow after a student joins a room, where they're able to answer questions and get feedback on submission.
