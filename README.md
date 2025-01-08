@@ -4,8 +4,9 @@ This project is a “clone” of the Socrative frontend, built using React and T
 
 Some potential improvements with more time could include:
 - Implementing global state management like Redux (skipped in interest of time).
+- Adaptive design to account for different screen sizes.
 - Adding unit tests and making components more testable.
-- More robust error handling and fallbacks behaviours.
+- More robust error handling and fallback behaviours.
 - Utilizing WebSockets for real-time live results.
 - Modularizing features into smaller, reusable components.
 - Enhancing the styling, as CSS posed the most notable differences compared to iOS layouts.
@@ -19,7 +20,7 @@ Some potential improvements with more time could include:
 2. **Install dependencies**  
    `npm install`
 
-4. **Start the service**  
+4. **Start the app**  
     `npm run dev`
 
 ## Features
